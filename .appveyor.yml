@@ -1,0 +1,16 @@
+image: Ubuntu  # образ для сборки
+
+stack: jdk 11  # версия JDK
+
+branches:
+  only:
+    - setupCI
+
+build: off  # будем использовать свой скрипт сборки
+
+install:
+    - java -jar ./artifacts/app-ibank.jar &
+
+build_script:
+  - chmod +x gradlew
+  - ./gradlew test -Dselenide.headless=true --info
